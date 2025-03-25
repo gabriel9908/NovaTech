@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { LightningBoltIcon } from "lucide-react";
+import { Zap } from "lucide-react";
 import { useUser } from "../lib/UserContext";
 import { getAuth, signOut } from "firebase/auth";
 import { useToast } from "@/hooks/use-toast";
@@ -55,7 +55,7 @@ export default function Header({ showAuthModal }: HeaderProps) {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <LightningBoltIcon className="h-8 w-auto text-primary" />
+            <Zap className="h-8 w-auto text-primary" />
             <span className="ml-2 text-xl font-bold text-gray-900">NovaTech</span>
           </div>
           

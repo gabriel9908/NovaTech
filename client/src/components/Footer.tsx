@@ -1,4 +1,4 @@
-import { LightningBoltIcon } from "lucide-react";
+import { Zap } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <LightningBoltIcon className="h-8 w-auto text-primary" />
+              <Zap className="h-8 w-auto text-primary" />
               <span className="ml-2 text-xl font-bold">NovaTech</span>
             </div>
             <p className="text-gray-400 mb-4">
