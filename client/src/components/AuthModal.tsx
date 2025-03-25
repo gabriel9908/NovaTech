@@ -81,9 +81,32 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     },
   });
 
+  const registerUserInBackend = async (user: any) => {
+    try {
+      await fetch("/api/users/firebase", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName || null,
+          photoURL: user.photoURL || null,
+        }),
+      });
+    } catch (error) {
+      console.error("Erro ao registrar usuário no backend:", error);
+    }
+  };
+
   const handleLoginSubmit = async (values: LoginFormValues) => {
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
+      const result = await signInWithEmailAndPassword(auth, values.email, values.password);
+      
+      // Registrar usuário no backend
+      await registerUserInBackend(result.user);
+      
       toast({
         title: "Login realizado com sucesso",
         description: "Bem-vindo de volta!",
@@ -92,7 +115,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     } catch (error: any) {
       toast({
         title: "Erro ao fazer login",
-        description: error.message,
+        description: error.message.includes("auth/invalid") 
+          ? "Email ou senha inválidos" 
+          : error.message,
         variant: "destructive",
       });
     }
@@ -100,7 +125,16 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   const handleRegisterSubmit = async (values: RegisterFormValues) => {
     try {
-      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const result = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      
+      // Registrar usuário no backend com o nome
+      await registerUserInBackend({
+        uid: result.user.uid,
+        email: result.user.email || values.email,
+        displayName: values.name,
+        photoURL: result.user.photoURL
+      });
+      
       toast({
         title: "Conta criada com sucesso",
         description: "Bem-vindo à NovaTech!",
@@ -109,7 +143,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     } catch (error: any) {
       toast({
         title: "Erro ao criar conta",
-        description: error.message,
+        description: error.message.includes("auth/email-already-in-use")
+          ? "Este email já está em uso"
+          : error.message,
         variant: "destructive",
       });
     }
@@ -118,7 +154,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const handleGoogleSignIn = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      
+      // Registrar usuário no backend
+      await registerUserInBackend(result.user);
+      
       toast({
         title: "Login realizado com sucesso",
         description: "Bem-vindo à NovaTech!",
@@ -127,7 +167,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     } catch (error: any) {
       toast({
         title: "Erro ao fazer login com Google",
-        description: error.message,
+        description: error.message.includes("popup-closed-by-user")
+          ? "Login cancelado"
+          : error.message,
         variant: "destructive",
       });
     }
