@@ -82,22 +82,22 @@ export default function Contact() {
     {
       icon: <MapPin className="h-6 w-6 text-primary" />,
       title: "Endereço",
-      lines: ["Av. Paulista, 1000 - Bela Vista", "São Paulo - SP, 01310-100"],
+      lines: [" Rua Agenor de Campos (antiga perimetral), 5 - Agua Azul", "Dom Aquino - MT, 78830-000"],
     },
     {
       icon: <Phone className="h-6 w-6 text-primary" />,
       title: "Telefone",
-      lines: ["(11) 3456-7890", "(11) 98765-4321"],
+      lines: ["(66) 99246-3778", "(66) 99208-1582"],
     },
     {
       icon: <Mail className="h-6 w-6 text-primary" />,
       title: "Email",
-      lines: ["contato@novatech.com.br", "suporte@novatech.com.br"],
+      lines: ["gabrielnascimento.01@hotmail.com"],
     },
     {
       icon: <Clock className="h-6 w-6 text-primary" />,
       title: "Horário de Atendimento",
-      lines: ["Segunda a Sexta: 9h às 18h", "Sábados: 9h às 13h"],
+      lines: ["Segunda a Sexta: 9h às 18h"],
     },
   ];
 

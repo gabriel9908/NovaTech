@@ -40,11 +40,11 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               {[
-                { icon: "fab fa-facebook-f", href: "#" },
-                { icon: "fab fa-twitter", href: "#" },
-                { icon: "fab fa-instagram", href: "#" },
-                { icon: "fab fa-github", href: "#" },
-                { icon: "fab fa-youtube", href: "#" }
+               
+               
+                { icon: "fab fa-instagram", href: "https://www.instagram.com/g_snts03" },
+                { icon: "fab fa-github", href: "https://github.com/gabriel9908" },
+                
               ].map((social, index) => (
                 <a key={index} href={social.href} className="text-gray-400 hover:text-white transition-colors duration-200">
                   <i className={`${social.icon} h-5 w-5`}></i>
