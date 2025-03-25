@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { getAuth, signOut } from "firebase/auth";
-import Chat from "@/components/dashboard/Chat";
+import Chat from "../components/dashboard/Chat";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { FileIcon, LogOut, MessageSquareText, User } from "lucide-react";
