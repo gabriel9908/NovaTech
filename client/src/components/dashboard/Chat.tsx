@@ -49,6 +49,25 @@ interface Conversation {
   admin?: ConversationUser;
 }
 
+function MessageSquareIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  );
+}
+
 export default function Chat({ userId, adminId, isAdmin, userName }: ChatProps) {
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -465,19 +484,25 @@ export default function Chat({ userId, adminId, isAdmin, userName }: ChatProps) 
                   onClick={handleFileSelect}
                   title="Anexar arquivo"
                 >
-                  <FileUp size={18} />
+                  <FileUp size={16} />
                 </Button>
                 <Button 
+                  variant="default"
                   size="icon"
                   onClick={handleSendMessage}
                   disabled={(!message && !selectedFile) || sendMessageMutation.isPending}
                   title="Enviar mensagem"
                 >
-                  <Send size={18} />
+                  <Send size={16} />
                 </Button>
               </div>
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                className="hidden" 
+                onChange={handleFileChange}
+              />
             </div>
-            
             {selectedFile && (
               <div className="mt-2 p-2 bg-gray-100 rounded flex items-center gap-2">
                 <Paperclip size={16} />
@@ -485,42 +510,16 @@ export default function Chat({ userId, adminId, isAdmin, userName }: ChatProps) 
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="p-1 h-6"
+                  className="p-1 h-6" 
                   onClick={() => setSelectedFile(null)}
                 >
-                  ✕
+                  &times;
                 </Button>
               </div>
             )}
-            
-            <input 
-              type="file" 
-              className="hidden" 
-              ref={fileInputRef}
-              onChange={handleFileChange}
-            />
           </div>
         </Card>
       </div>
     </div>
-  );
-}
-
-function MessageSquareIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-    </svg>
   );
 }

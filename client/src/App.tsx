@@ -62,14 +62,14 @@ function App() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <UserProvider value={{ user, setUser }}>
+    <UserProvider value={{ user, setUser }}>
+      <QueryClientProvider client={queryClient}>
         <div className="font-sans text-gray-800 bg-gray-50 min-h-screen">
           <Router />
           <Toaster />
         </div>
-      </UserProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </UserProvider>
   );
 }
 

@@ -77,7 +77,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       email: "",
       password: "",
       confirmPassword: "",
-      terms: false,
+      terms: true,
     },
   });
 
